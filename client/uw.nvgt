@@ -265,7 +265,7 @@ int lastruns = 0;
 string runs;
 double kills;
 string password;
-savedata sd("data.dat", "charbhoom");
+savedata sd("data.dat", "fcknikckjjieifiififwsssiriirioaioieiwwkowowkwkokwokakoaokoekoakoaokfffffawewaa");
 string currentloc;
 float final_pan;
 float final_volume;
@@ -493,7 +493,7 @@ string keygen(string fn) {
 void readprefs() {
 	file f;
 	f.open(prefsdir + "/config.dat", "r");
-	string content = string_decrypt(f.read(), "charbhoom").replace("\r\n", "\n");
+	string content = string_decrypt(f.read(), "fcknikckjjieifiififwsssiriirioaioieiwwkowowkwkokwokakoaokoekoakoaokfffffawewaa").replace("\r\n", "\n");
 	string[] peramitors = string_split(content, "\n");
 	string[] values;
 	for (uint i = 0; i < peramitors.length(); i++) {
@@ -944,7 +944,7 @@ void writeprefs() {
 		s.insert_last("script_keysi" + script_keys[i] + "=" + script_keys[i]);
 	for (uint i = 0; i < accounts.length(); i++)
 		s.insert_last("accountsi" + accounts[i] + "=" + accounts[i]);
-	string ss = string_encrypt(join(s, "\n"), "charbhoom");
+	string ss = string_encrypt(join(s, "\n"), "fcknikckjjieifiififwsssiriirioaioieiwwkowowkwkokwokakoaokoekoakoaokfffffawewaa");
 	f.write(ss);
 	f.close();
 }
