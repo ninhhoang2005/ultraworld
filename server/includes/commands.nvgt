@@ -388,7 +388,7 @@ void command(player@p, string command) {
 		return;
 	} else if(parsed[0] == "/teams"){
 team@[] ts = find_best_teams();
-if(ts.length() == 0) {
+if (ts.length() < 1) {
 send_reliable(p, "There are currently no teams", 0);
 return;
 }
@@ -404,9 +404,36 @@ menu.add(item, "");
 menu.send(p.peer_id);
 	} else if (parsed[0] == "/teammembers") {
 		int ist = is_in_team(p.name);
-		if (ist > -1)
-			send_reliable(p, teams[ist].list_members(), 2);
-		else {
+		if (ist > -1) {
+			team@ t = teams[ist];
+			cmenupage menu;
+			menu.initial_packet = "teammembers";
+			teamplayer@[] onps = t.online_players;
+			teamplayer@[] offps = t.offline_players;
+			menu.intro = "There are " + t.players.length() + " members in total: " + onps.length() + " online and " + offps.length() + " offline.";
+			menu.maxitem = 500;
+			menu.add("Online Members", "");
+			for(uint i = 0; i < onps.length(); i++){
+				teamplayer@ tp = onps[i];
+				string item = tp.name + " (online)";
+				if (tp.type == "owner") item += " - owner";
+				else if (tp.type == "mod") item += " - moderator";
+				menu.add(item, "");
+			}
+			if (offps.length() < 1) {
+				menu.add("there are currently no offline members.", "");
+			} else {
+				menu.add("Offline Members", "");
+				for (uint i = 0; i < offps.length(); i++) {
+					teamplayer@ tp = offps[i];
+					string item = tp.name + " (offline)";
+					if (tp.type == "owner") item += " - owner";
+					else if (tp.type == "mod") item += " - moderator";
+					menu.add(item, "");
+				}
+			}
+			menu.send(p.peer_id);
+		} else {
 			send_reliable(p, "You are not in a team", 0);
 			return;
 		}
