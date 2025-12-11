@@ -44,6 +44,7 @@ mainloop();
 			array<string> valid = {"kills", "points"};
 			if (valid.find(result) > -1) {
 				send_reliable(peer_id, "/team" + result, 1);
+				continue;
 			}
 			speak("Invalid command");
 			break;

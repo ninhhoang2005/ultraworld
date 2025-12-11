@@ -1475,11 +1475,26 @@ int yesno(string question) {
 void musicmenu() {
 	setupmenu(false, true);
 	string[] ambs = string_split(musictypes, "\r\n", false);
-	for (uint i = 0; i < ambs.length(); i++)
-		m.add_item(ambs[i] + ".ogg", ambs[i], ambs[i], true);
+	#if plugin_legacy_sound
+		pack@ musicpack = cast<pack>(sound_default_pack);
+	#endif
+	#if_not plugin_legacy_sound
+		pack_file@ musicpack = cast<pack_file>(sound_default_pack);
+	#endif
+	if (@musicpack == null) {
+		speak("Error. Unable to load game musics.");
+		return;
+	}
+	string[] all_pack_files = musicpack.list_files();
+	for (uint i = 0; i < ambs.length(); i++) {
+		string name = ambs[i];
+		string filename = name + ".ogg";
+		if (all_pack_files.find(filename) > -1)
+			m.add_item(filename, name, name, true);
+	}
 	m.add_item_tts("go back", "back");
 	int mres = m.run("Select a music track to be played in the main menu", true);
-	if (m.get_item_name(mres) != "back" and mres != 0) {
+	if (m.get_item_name(mres) != "back" && mres != 0) {
 		string newtrack = m.get_item_name(mres) + ".ogg";
 		speak("done");
 		musictrack = newtrack;
