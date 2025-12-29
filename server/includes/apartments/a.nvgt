@@ -187,7 +187,7 @@ zone:22:22:20:20:0:10:trashcan:trackme
 trashcan:22:22:20:20:0:10
 tile:20:20:27:29:0:0:mat
 tile:22:28:10:18:0:0:tile5
-reverb:22:28:10:18:0:20: bathroom:0.7:0.4:0.4:0.5:0.8
+reverb:22:28:10:18:0:20: bathroom:1.0:1.0:0.4:0.5:1.0
 zone:22:28:10:18:0:20:bathroom
 tile:22:28:10:12:0:0:bathtub3
 zone:22:28:10:12:0:20:shower
