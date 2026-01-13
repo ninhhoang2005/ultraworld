@@ -66,12 +66,12 @@ void netloop() {
 	if (washbasins.length() > 0) {
 		for (uint i = 0; i < washbasins.length(); i++)
 			if (@washbasins[i] != null)
-				washbasins[i].loop();
+				washbasins[i].loop(i);
 	}
 	if (showers.length() > 0) {
 		for (uint i = 0; i < showers.length(); i++)
 			if (@showers[i] != null)
-				showers[i].loop();
+				showers[i].loop(i);
 	}
 	if (item_cariers.length() > 0) {
 		for (uint i = 0; i < item_cariers.length(); i++)
